@@ -1,12 +1,3 @@
-/*
-Create global variables to hold the red, green and blue value generated in readColor() 
-*/
-namespace planetX_RGB_cache {
-    export let r = 0;
-    export let g = 0;
-    export let b = 0;
-}
-
 /**
 * Functions to PlanetX sensor by ELECFREAKS Co.,Ltd.
 */
@@ -187,6 +178,10 @@ namespace PlanetX_Basic {
     const APDS9960_AICLEAR = 0xE7
     let color_first_init = false
     let color_new_init = false
+    
+    let cachedRed = 0
+    let cachedGreen = 0
+    let cachedBlue = 0
 
     let __dht11_last_read_time = 0;
     let __temperature: number = 0
@@ -2190,9 +2185,9 @@ namespace PlanetX_Basic {
         b = b * 255 / avg;
 
         // Cache the rgb values
-        planetX_RGB_cache.r = r;
-        planetX_RGB_cache.g = g;
-        planetX_RGB_cache.b = b;
+        cachedRed = r;
+        cachedGreen = g;
+        cachedBlue = b;
         
         //let hue = rgb2hue(r, g, b);
         let hue = rgb2hsl(r, g, b)
@@ -2274,11 +2269,11 @@ namespace PlanetX_Basic {
     export function extractRGB(channel: RGBChannel): number {
         switch (channel) {
             case RGBChannel.Red:
-                return Math.round(planetX_RGB_cache.r);
+                return Math.round(cachedRed);
             case RGBChannel.Green:
-                return Math.round(planetX_RGB_cache.g);
+                return Math.round(cachedGreen);
             case RGBChannel.Blue:
-                return Math.round(planetX_RGB_cache.b);
+                return Math.round(cachedBlue);
             default:
                 return 0;
         }
