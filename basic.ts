@@ -2263,7 +2263,7 @@ namespace PlanetX_Basic {
         }
     }
 
-    //% blockId=apds9960_extract_rgb block="Color sensor IIC port get $channel value (0~255)"
+    //% blockId=apds9960_extract_rgb block="Color sensor IIC port get raw $channel value"
     //% subcategory=Sensor group="IIC Port"
     //% channel.defl=RGBChannel.Red
     export function extractRGB(channel: RGBChannel): number {
