@@ -1,6 +1,7 @@
 {
     "PlanetX_Basic.AnalogRJPin.J1|block": "J1",
     "PlanetX_Basic.AnalogRJPin.J2|block": "J2",
+    "PlanetX_Basic.apds9960_extract_rgb|block": "颜色传感器 IIC端口 获取 $channel 原始值",
     "PlanetX_Basic.BME280_state.BME280_altitude|block": "海拔(M)",
     "PlanetX_Basic.BME280_state.BME280_humidity|block": "湿度(0~100%)",
     "PlanetX_Basic.BME280_state.BME280_pressure|block": "气压(hPa)",
@@ -104,7 +105,6 @@
     "PlanetX_Basic.buttonCD|block": "按钮模块 %Rjpin 按键 %button 被按下",
     "PlanetX_Basic.buttonEvent|block": "当按钮 %Rjpin %button 被按下时",
     "PlanetX_Basic.checkCard|block": "RFID 传感器 IIC接口 检测到卡片",
-    "PlanetX_Basic.apds9960_extract_rgb|block": "颜色传感器 IIC端口 获取 $channel 值"
     "PlanetX_Basic.checkColor|block": "颜色识别传感器 IIC接口 检测到 %color",
     "PlanetX_Basic.dht11Sensor|block": "DHT11 温湿度传感器 %Rjpin %dht11state 值",
     "PlanetX_Basic.dht20Sensor|block": "DHT20 温湿度传感器 %dht20state 值",
