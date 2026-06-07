@@ -1,3 +1,12 @@
+/*
+Create global variables to hold the red, green and blue value generated in readColor() 
+*/
+namespace planetX_RGB_cache {
+    export let r = 0;
+    export let g = 0;
+    export let b = 0;
+}
+
 /**
 * Functions to PlanetX sensor by ELECFREAKS Co.,Ltd.
 */
@@ -1240,6 +1249,16 @@ namespace PlanetX_Basic {
         white
     }
 
+    // Block for reading red, green and blue values
+    export enum RGBChannel {
+        //% block="Red"
+        Red = 1,
+        //% block="Green"
+        Green = 2,
+        //% block="Blue"
+        Blue = 3,
+    }
+
     export enum GasList {
         //% block="Co"
         Co,
@@ -2169,6 +2188,12 @@ namespace PlanetX_Basic {
         r = r * 255 / avg;
         g = g * 255 / avg;
         b = b * 255 / avg;
+
+        // Cache the rgb values
+        planetX_RGB_cache.r = r;
+        planetX_RGB_cache.g = g;
+        planetX_RGB_cache.b = b;
+        
         //let hue = rgb2hue(r, g, b);
         let hue = rgb2hsl(r, g, b)
         if (color_new_init == true && hue >= 180 && hue <= 201 && temp_c >= 6000 && (temp_b - temp_g) < 1000 || (temp_r > 4096 && temp_g > 4096 && temp_b > 4096)) {
@@ -2177,6 +2202,7 @@ namespace PlanetX_Basic {
         }
         return hue
     }
+    
     //% block="Color sensor IIC port detects %color"
     //% subcategory=Sensor group="IIC Port"
     //% color.fieldEditor="gridpicker" color.fieldOptions.columns=3
@@ -2242,6 +2268,22 @@ namespace PlanetX_Basic {
         }
     }
 
+    //% blockId=apds9960_extract_rgb block="Color sensor IIC port get $channel value (0~255)"
+    //% subcategory=Sensor group="IIC Port"
+    //% channel.defl=RGBChannel.Red
+    export function extractRGB(channel: RGBChannel): number {
+        switch (channel) {
+            case RGBChannel.Red:
+                return Math.round(planetX_RGB_cache.r);
+            case RGBChannel.Green:
+                return Math.round(planetX_RGB_cache.g);
+            case RGBChannel.Blue:
+                return Math.round(planetX_RGB_cache.b);
+            default:
+                return 0;
+        }
+    }
+    
     //% block="RFID sensor IIC port read data from card"
     //% subcategory=Sensor group="IIC Port"
     export function readDataBlock(): string {
