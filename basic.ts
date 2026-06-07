@@ -2177,18 +2177,18 @@ namespace PlanetX_Basic {
         serial.writeLine("b")
         serial.writeNumber(c)
         serial.writeLine("c")
-
+        
+        // Cache the rgb values
+        cachedRed = r;
+        cachedGreen = g;
+        cachedBlue = b;
+        
         // map to rgb based on clear channel
         let avg = c / 3;
         r = r * 255 / avg;
         g = g * 255 / avg;
         b = b * 255 / avg;
 
-        // Cache the rgb values
-        cachedRed = r;
-        cachedGreen = g;
-        cachedBlue = b;
-        
         //let hue = rgb2hue(r, g, b);
         let hue = rgb2hsl(r, g, b)
         if (color_new_init == true && hue >= 180 && hue <= 201 && temp_c >= 6000 && (temp_b - temp_g) < 1000 || (temp_r > 4096 && temp_g > 4096 && temp_b > 4096)) {
